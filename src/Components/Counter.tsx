@@ -7,7 +7,7 @@ import {Joke} from './Joke'
 type CounterPropsType = {
     value: number
     /**
-     * maxValue should be more than zero or Scooby finds you...
+     * maxValue should be more than zero or Scooby finds ya...
      */
     maxValue: number
     increaseCounterValue: () => void
