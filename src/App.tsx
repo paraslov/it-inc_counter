@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import './App.css'
 import {Counter} from './Components/Counter'
+import {Settings} from './Components/Settings';
 
 function App() {
     const [value, setValue] = useState(0)
@@ -9,6 +10,7 @@ function App() {
 
     return (
         <div className="App">
+            <Settings value={2} maxValue={5}/>
             <Counter value={value}
                      maxValue={5}
                      increaseCounterValue={increaseCounterValue}

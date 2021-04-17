@@ -1,8 +1,7 @@
 import {CounterOutput} from './CounterOutput'
-import {IncreaseButton} from './IncreaseButton'
-import {ResetButton} from './ResetButton'
 import React from 'react'
 import {Joke} from './Joke'
+import {Button} from './Button'
 
 type CounterPropsType = {
     value: number
@@ -21,13 +20,15 @@ export function Counter(props: CounterPropsType) {
                 <div className={'counter'}>
                     <CounterOutput value={props.value} maxValue={props.maxValue}/>
                     <div className={'control'}>
-                        <IncreaseButton value={props.value}
-                                        maxValue={props.maxValue}
-                                        increaseCounterValue={props.increaseCounterValue}/>
-                        <ResetButton value={props.value}
-                                     resetCounterValue={props.resetCounterValue}/>
+                        <Button value={props.value}
+                                btnTitle={'inc'}
+                                maxValue={props.maxValue}
+                                changeCounterValue={props.increaseCounterValue}/>
+                        <Button value={props.value}
+                                btnTitle={'reset'}
+                                changeCounterValue={props.resetCounterValue}/>
                     </div>
-                </div> : <Joke />}
+                </div> : <Joke/>}
         </>
     )
 }
