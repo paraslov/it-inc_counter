@@ -31,14 +31,14 @@ function App() {
         <div className="App">
             <Settings startValue={startValue}
                       maxValue={maxValue}
-                      btnActive={settingsActive}
+                      settingsActive={settingsActive}
                       onMaxValueChange={onMaxValueChange}
                       onStartValueChange={onStartValueChange}
                       onSetButtonClick={onSetButtonClick}
                         />
             <Counter counterValue={counterValue}
                      maxValue={maxValue}
-                     btnActive={!settingsActive}
+                     settingsActive={settingsActive}
                      increaseCounterValue={increaseCounterValue}
                      resetCounterValue={resetCounterValue}/>
         </div>

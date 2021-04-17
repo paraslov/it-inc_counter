@@ -8,13 +8,18 @@ type SettingsPropsType = {
      * maxValue should be more than zero or Scooby finds ya...
      */
     maxValue: number
-    btnActive: boolean
+    settingsActive: boolean
     onMaxValueChange: (newMaxValue: number) => void
     onStartValueChange: (newStartValue: number) => void
     onSetButtonClick: () => void
 }
 
 export function Settings(props: SettingsPropsType) {
+    let btnDisabled: boolean = !props.settingsActive || props.startValue >= props.maxValue
+    // if (props.startValue >= props.maxValue) {
+    //     btnDisabled = true
+    // }
+
     return (
         <>
             {props.maxValue > 0 ?
@@ -24,9 +29,8 @@ export function Settings(props: SettingsPropsType) {
                                   onMaxValueChange={props.onMaxValueChange}
                                   onStartValueChange={props.onStartValueChange}/>
                     <div className={'control'}>
-                        <Button counterValue={props.startValue}
-                                btnTitle={'set'}
-                                btnActive={props.btnActive}
+                        <Button btnTitle={'set'}
+                                btnDisabled={btnDisabled}
                                 btnOnClickCallback={props.onSetButtonClick}/>
                     </div>
                 </div> : false}

@@ -9,28 +9,30 @@ type CounterPropsType = {
      * maxValue should be more than zero or Scooby finds ya...
      */
     maxValue: number
-    btnActive: boolean
+    settingsActive: boolean
     increaseCounterValue: () => void
     resetCounterValue: () => void
 }
 
 export function Counter(props: CounterPropsType) {
+    let btnIncDisabled = props.settingsActive || props.counterValue === props.maxValue
+    // if(props.counterValue === props.maxValue) {
+    //     btnIncDisabled = true
+    // }
+
     return (
         <>
             {props.maxValue > 0 ?
                 <div className={'counter'}>
                     <CounterOutput value={props.counterValue}
-                                   settingsUpdating={props.btnActive}
+                                   settingsUpdating={!props.settingsActive}
                                    maxValue={props.maxValue}/>
                     <div className={'control'}>
-                        <Button counterValue={props.counterValue}
-                                btnTitle={'inc'}
-                                btnActive={props.btnActive}
-                                maxValue={props.maxValue}
+                        <Button btnTitle={'inc'}
+                                btnDisabled={btnIncDisabled}
                                 btnOnClickCallback={props.increaseCounterValue}/>
-                        <Button counterValue={props.counterValue}
-                                btnTitle={'reset'}
-                                btnActive={props.btnActive}
+                        <Button btnTitle={'reset'}
+                                btnDisabled={props.settingsActive}
                                 btnOnClickCallback={props.resetCounterValue}/>
                     </div>
                 </div> : <Joke/>}
