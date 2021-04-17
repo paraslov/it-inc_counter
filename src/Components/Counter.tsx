@@ -4,11 +4,12 @@ import {Joke} from './Joke'
 import {Button} from './Button'
 
 type CounterPropsType = {
-    startValue: number
+    counterValue: number
     /**
      * maxValue should be more than zero or Scooby finds ya...
      */
     maxValue: number
+    btnActive: boolean
     increaseCounterValue: () => void
     resetCounterValue: () => void
 }
@@ -18,15 +19,19 @@ export function Counter(props: CounterPropsType) {
         <>
             {props.maxValue > 0 ?
                 <div className={'counter'}>
-                    <CounterOutput value={props.startValue} maxValue={props.maxValue}/>
+                    <CounterOutput value={props.counterValue}
+                                   settingsUpdating={props.btnActive}
+                                   maxValue={props.maxValue}/>
                     <div className={'control'}>
-                        <Button startValue={props.startValue}
+                        <Button counterValue={props.counterValue}
                                 btnTitle={'inc'}
+                                btnActive={props.btnActive}
                                 maxValue={props.maxValue}
-                                changeCounterValue={props.increaseCounterValue}/>
-                        <Button startValue={props.startValue}
+                                btnOnClickCallback={props.increaseCounterValue}/>
+                        <Button counterValue={props.counterValue}
                                 btnTitle={'reset'}
-                                changeCounterValue={props.resetCounterValue}/>
+                                btnActive={props.btnActive}
+                                btnOnClickCallback={props.resetCounterValue}/>
                     </div>
                 </div> : <Joke/>}
         </>

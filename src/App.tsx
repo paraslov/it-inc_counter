@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {ChangeEvent, useState} from 'react'
 import './App.css'
 import {Counter} from './Components/Counter'
 import {Settings} from './Components/Settings';
@@ -7,23 +7,38 @@ import {SettingsMenu} from './Components/SettingsMenu';
 function App() {
     const [startValue, setStartValue] = useState(0)
     const [maxValue, setMaxValue] = useState(5)
-    const [settingsActive, setSettingsActive] = useState(true)
+    const [counterValue, setCounterValue] = useState(startValue)
+    const [settingsActive, setSettingsActive] = useState(false)
 
-    const increaseCounterValue = () => setStartValue(startValue + 1)
-    const resetCounterValue = () => setStartValue(0)
-    
+    const increaseCounterValue = () => setCounterValue(counterValue + 1)
+    const resetCounterValue = () => setCounterValue(startValue)
+
+    const onMaxValueChange = (newMaxValue: number) => {
+        setSettingsActive(true)
+        setMaxValue(newMaxValue)
+    }
+    const onStartValueChange = (newStartValue: number) => {
+        setSettingsActive(true)
+        setStartValue(newStartValue)
+    }
+    const onSetButtonClick = () => {
+        setCounterValue(startValue)
+        setSettingsActive(false)
+    }
+
 
     return (
         <div className="App">
             <Settings startValue={startValue}
                       maxValue={maxValue}
-                      settingsActive={settingsActive}
-                      setMaxValue={setMaxValue}
-                      setStartValue={setStartValue}
-                      setSettingsActive={setSettingsActive}
+                      btnActive={settingsActive}
+                      onMaxValueChange={onMaxValueChange}
+                      onStartValueChange={onStartValueChange}
+                      onSetButtonClick={onSetButtonClick}
                         />
-            <Counter startValue={startValue}
+            <Counter counterValue={counterValue}
                      maxValue={maxValue}
+                     btnActive={!settingsActive}
                      increaseCounterValue={increaseCounterValue}
                      resetCounterValue={resetCounterValue}/>
         </div>

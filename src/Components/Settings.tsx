@@ -8,10 +8,10 @@ type SettingsPropsType = {
      * maxValue should be more than zero or Scooby finds ya...
      */
     maxValue: number
-    settingsActive: boolean
-    setMaxValue: (value: number) => void
-    setStartValue: (value: number) => void
-    setSettingsActive: (active: boolean) => void
+    btnActive: boolean
+    onMaxValueChange: (newMaxValue: number) => void
+    onStartValueChange: (newStartValue: number) => void
+    onSetButtonClick: () => void
 }
 
 export function Settings(props: SettingsPropsType) {
@@ -21,13 +21,13 @@ export function Settings(props: SettingsPropsType) {
                 <div className={'counter'}>
                     <SettingsMenu startValue={props.startValue}
                                   maxValue={props.maxValue}
-                                  setMaxValue={props.setMaxValue}
-                                  setStartValue={props.setStartValue}/>
+                                  onMaxValueChange={props.onMaxValueChange}
+                                  onStartValueChange={props.onStartValueChange}/>
                     <div className={'control'}>
-                        <Button startValue={props.startValue}
+                        <Button counterValue={props.startValue}
                                 btnTitle={'set'}
-                                btnActive={props.settingsActive}
-                                changeCounterValue={() => []}/>
+                                btnActive={props.btnActive}
+                                btnOnClickCallback={props.onSetButtonClick}/>
                     </div>
                 </div> : false}
         </>

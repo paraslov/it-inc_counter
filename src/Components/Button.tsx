@@ -2,18 +2,18 @@ import React from 'react'
 
 type ButtonPropsType = {
     btnTitle: string
-    btnActive?: boolean
-    startValue: number
+    btnActive: boolean
+    counterValue: number
     maxValue?: number
-    changeCounterValue: () => void
+    btnOnClickCallback: () => void
 }
 
 export function Button(props: ButtonPropsType) {
     return (
         <div className={'btn'}>
-            <button onClick={props.changeCounterValue}
-                    className={props.startValue === props.maxValue || props.btnActive ? 'disabled' : ''}
-                    disabled={props.startValue === props.maxValue || props.btnActive}>{props.btnTitle}
+            <button onClick={props.btnOnClickCallback}
+                    className={!props.btnActive || props.counterValue === props.maxValue ? 'disabled' : ''}
+                    disabled={!props.btnActive || props.counterValue === props.maxValue}>{props.btnTitle}
             </button>
         </div>
     )

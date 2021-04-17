@@ -45,6 +45,11 @@ button {
     border-radius: 15px;
 }
 
+.settingsUpdatingMessage {
+    font-size: 27px;
+    text-align: center;
+}
+
 .control {
     display: flex;
     align-items: center;

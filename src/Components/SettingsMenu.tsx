@@ -3,18 +3,18 @@ import React, {ChangeEvent, useState} from 'react'
 type SettingsMenuPropsType = {
     startValue: number
     maxValue: number
-    setMaxValue: (value: number) => void
-    setStartValue: (value: number) => void
+    onMaxValueChange: (newMaxValue: number) => void
+    onStartValueChange: (newStartValue: number) => void
 }
 
 export function SettingsMenu(props: SettingsMenuPropsType) {
 
 
     const onMaxValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-        props.setMaxValue(+e.currentTarget.value)
+        props.onMaxValueChange(+e.currentTarget.value)
     }
     const onStartValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-        props.setStartValue(+e.currentTarget.value)
+        props.onStartValueChange(+e.currentTarget.value)
     }
 
     return (
