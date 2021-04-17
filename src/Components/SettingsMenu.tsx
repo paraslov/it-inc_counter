@@ -8,7 +8,7 @@ type SettingsMenuPropsType = {
 }
 
 export function SettingsMenu(props: SettingsMenuPropsType) {
-
+    const error = props.startValue >= props.maxValue || props.startValue<0
 
     const onMaxValueChange = (e: ChangeEvent<HTMLInputElement>) => {
         props.onMaxValueChange(+e.currentTarget.value)
@@ -21,11 +21,17 @@ export function SettingsMenu(props: SettingsMenuPropsType) {
         <div className={`settingsWrapper ${props.startValue === props.maxValue ? 'maxWarning' : ''}`}>
             <div className={'inputItem'}>
                 <span>max value: </span>
-                <input type="number" value={props.maxValue} onChange={onMaxValueChange}/>
+                <input className={error ? 'error' : ''}
+                       type="number"
+                       value={props.maxValue}
+                       onChange={onMaxValueChange}/>
             </div>
             <div className={'inputItem'}>
                 <span>start value: </span>
-                <input type="number" value={props.startValue} onChange={onStartValueChange}/>
+                <input className={error ? 'error' : ''}
+                       type="number"
+                       value={props.startValue}
+                       onChange={onStartValueChange}/>
             </div>
         </div>
     )

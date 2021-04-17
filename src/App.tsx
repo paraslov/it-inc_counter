@@ -14,6 +14,7 @@ function App() {
     const resetCounterValue = () => setCounterValue(startValue)
 
     const onMaxValueChange = (newMaxValue: number) => {
+        setCounterValue(0)
         setSettingsActive(true)
         setMaxValue(newMaxValue)
     }
@@ -38,6 +39,7 @@ function App() {
                         />
             <Counter counterValue={counterValue}
                      maxValue={maxValue}
+                     startValue={startValue}
                      settingsActive={settingsActive}
                      increaseCounterValue={increaseCounterValue}
                      resetCounterValue={resetCounterValue}/>

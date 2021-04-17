@@ -127,6 +127,11 @@ button {
     margin-right: 20px;
 }
 
+.inputItem input.error {
+    background-color: deeppink;
+    border: 3px solid darkred;
+}
+
 @media (max-width: 1023px) {
     .App {
         flex-direction: column;

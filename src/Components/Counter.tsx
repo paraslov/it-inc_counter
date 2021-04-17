@@ -8,6 +8,7 @@ type CounterPropsType = {
     /**
      * maxValue should be more than zero or Scooby finds ya...
      */
+    startValue: number
     maxValue: number
     settingsActive: boolean
     increaseCounterValue: () => void
@@ -16,26 +17,21 @@ type CounterPropsType = {
 
 export function Counter(props: CounterPropsType) {
     let btnIncDisabled = props.settingsActive || props.counterValue === props.maxValue
-    // if(props.counterValue === props.maxValue) {
-    //     btnIncDisabled = true
-    // }
 
     return (
-        <>
-            {props.maxValue > 0 ?
-                <div className={'counter'}>
-                    <CounterOutput value={props.counterValue}
-                                   settingsUpdating={!props.settingsActive}
-                                   maxValue={props.maxValue}/>
-                    <div className={'control'}>
-                        <Button btnTitle={'inc'}
-                                btnDisabled={btnIncDisabled}
-                                btnOnClickCallback={props.increaseCounterValue}/>
-                        <Button btnTitle={'reset'}
-                                btnDisabled={props.settingsActive}
-                                btnOnClickCallback={props.resetCounterValue}/>
-                    </div>
-                </div> : <Joke/>}
-        </>
+        <div className={'counter'}>
+            <CounterOutput counterValue={props.counterValue}
+                           startValue={props.startValue}
+                           settingsUpdating={!props.settingsActive}
+                           maxValue={props.maxValue}/>
+            <div className={'control'}>
+                <Button btnTitle={'inc'}
+                        btnDisabled={btnIncDisabled}
+                        btnOnClickCallback={props.increaseCounterValue}/>
+                <Button btnTitle={'reset'}
+                        btnDisabled={props.settingsActive}
+                        btnOnClickCallback={props.resetCounterValue}/>
+            </div>
+        </div>
     )
 }

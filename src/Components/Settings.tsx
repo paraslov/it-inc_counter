@@ -15,25 +15,20 @@ type SettingsPropsType = {
 }
 
 export function Settings(props: SettingsPropsType) {
-    let btnDisabled: boolean = !props.settingsActive || props.startValue >= props.maxValue
-    // if (props.startValue >= props.maxValue) {
-    //     btnDisabled = true
-    // }
+    let btnDisabled: boolean = !props.settingsActive || props.startValue >= props.maxValue ||
+        props.startValue < 0
 
     return (
-        <>
-            {props.maxValue > 0 ?
-                <div className={'counter'}>
-                    <SettingsMenu startValue={props.startValue}
-                                  maxValue={props.maxValue}
-                                  onMaxValueChange={props.onMaxValueChange}
-                                  onStartValueChange={props.onStartValueChange}/>
-                    <div className={'control'}>
-                        <Button btnTitle={'set'}
-                                btnDisabled={btnDisabled}
-                                btnOnClickCallback={props.onSetButtonClick}/>
-                    </div>
-                </div> : false}
-        </>
+        <div className={'counter'}>
+            <SettingsMenu startValue={props.startValue}
+                          maxValue={props.maxValue}
+                          onMaxValueChange={props.onMaxValueChange}
+                          onStartValueChange={props.onStartValueChange}/>
+            <div className={'control'}>
+                <Button btnTitle={'set'}
+                        btnDisabled={btnDisabled}
+                        btnOnClickCallback={props.onSetButtonClick}/>
+            </div>
+        </div>
     )
 }
