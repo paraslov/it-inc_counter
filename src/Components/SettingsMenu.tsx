@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react'
+import React, {ChangeEvent} from 'react'
 
 type SettingsMenuPropsType = {
     startValue: number
@@ -8,7 +8,7 @@ type SettingsMenuPropsType = {
 }
 
 export function SettingsMenu(props: SettingsMenuPropsType) {
-    const error = props.startValue >= props.maxValue || props.startValue<0
+    const error = props.startValue >= props.maxValue || props.startValue < 0
 
     const onMaxValueChange = (e: ChangeEvent<HTMLInputElement>) => {
         props.onMaxValueChange(+e.currentTarget.value)

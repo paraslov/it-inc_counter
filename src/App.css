@@ -28,6 +28,7 @@ button {
     justify-content: center;
     align-items: center;
 }
+
 .counter:last-child {
     margin-right: 0;
 }
@@ -136,7 +137,8 @@ button {
     .App {
         flex-direction: column;
     }
+
     .counter {
-        margin: 40px 0 10px 0 ;
+        margin: 40px 0 10px 0;
     }
 }

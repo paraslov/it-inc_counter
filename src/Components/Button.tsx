@@ -10,7 +10,7 @@ export function Button(props: ButtonPropsType) {
     return (
         <div className={'btn'}>
             <button onClick={props.btnOnClickCallback}
-                    className={props.btnDisabled ?'disabled' : ''}
+                    className={props.btnDisabled ? 'disabled' : ''}
                     disabled={props.btnDisabled}>{props.btnTitle}
             </button>
         </div>

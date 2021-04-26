@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useMemo} from 'react'
 import {Button} from './Button'
 import {SettingsMenu} from './SettingsMenu';
 
@@ -14,10 +14,11 @@ type SettingsPropsType = {
     onSetButtonClick: () => void
 }
 
-export function Settings(props: SettingsPropsType) {
-    let btnDisabled: boolean = !props.settingsActive || props.startValue >= props.maxValue ||
-        props.startValue < 0
-
+function Settings(props: SettingsPropsType) {
+    let btnDisabled: boolean = useMemo(() => {
+        return !props.settingsActive || props.startValue >= props.maxValue || props.startValue < 0
+    }, [props.maxValue, props.startValue, props.settingsActive])
+    console.log('Setting rendering')
     return (
         <div className={'counter'}>
             <SettingsMenu startValue={props.startValue}
@@ -32,3 +33,5 @@ export function Settings(props: SettingsPropsType) {
         </div>
     )
 }
+
+export const MemoSettings = React.memo(Settings)

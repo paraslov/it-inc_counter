@@ -17,7 +17,7 @@ type CounterPropsType = {
 
 export function Counter(props: CounterPropsType) {
     let btnIncDisabled = props.settingsActive || props.counterValue === props.maxValue
-
+    console.log('Counter rendering')
     return (
         <div className={'counter'}>
             <CounterOutput counterValue={props.counterValue}
