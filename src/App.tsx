@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import './App.css'
 import {Counter} from './Components/Counter'
 import {MemoSettings} from './Components/Settings'
@@ -22,20 +22,20 @@ function App() {
     const increaseCounterValue = () => setCounterValue(counterValue + 1)
     const resetCounterValue = () => setCounterValue(startValue)
 
-    const onMaxValueChange = (newMaxValue: number) => {
+    const onMaxValueChange = useCallback((newMaxValue: number) => {
         setCounterValue(0)
         setSettingsActive(true)
         setMaxValue(newMaxValue)
-    }
-    const onStartValueChange = (newStartValue: number) => {
+    }, [])
+    const onStartValueChange = useCallback((newStartValue: number) => {
         setSettingsActive(true)
         setStartValue(newStartValue)
-    }
-    const onSetButtonClick = () => {
+    }, [])
+    const onSetButtonClick = useCallback(() => {
         localStorage.setItem('counterSettings', JSON.stringify({startValue: startValue, maxValue: maxValue}))
         setCounterValue(startValue)
         setSettingsActive(false)
-    }
+    }, [startValue, maxValue])
 
     return (
         <div className="App">

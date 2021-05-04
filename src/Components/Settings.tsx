@@ -15,9 +15,7 @@ type SettingsPropsType = {
 }
 
 function Settings(props: SettingsPropsType) {
-    let btnDisabled: boolean = useMemo(() => {
-        return !props.settingsActive || props.startValue >= props.maxValue || props.startValue < 0
-    }, [props.maxValue, props.startValue, props.settingsActive])
+    let btnDisabled: boolean = !props.settingsActive || props.startValue >= props.maxValue || props.startValue < 0
     console.log('Setting rendering')
     return (
         <div className={'counter'}>
