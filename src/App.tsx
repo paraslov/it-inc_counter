@@ -1,50 +1,32 @@
-import React, {useCallback, useEffect, useReducer} from 'react'
+import React, {useCallback} from 'react'
 import './App.css'
 import {Counter} from './Components/Counter'
 import {MemoSettings} from './Components/Settings'
 import {
-    counterReducer,
-    counterValuesInitialization,
+    CounterReducerActionsType,
     onCounterValueChange,
     onMaxValueChangeAC,
     onSetButtonClickAC,
     onStartValueChangeAC
 } from './Redux/counter_reducer';
+import {useDispatch, useSelector} from 'react-redux';
+import {Dispatch} from 'redux';
+import {AppRootType} from './Redux/store';
 
-export type InitStateType = {
-    startValue: number
-    maxValue: number
-    counterValue: number
-    settingsIsActive: boolean
-}
 
 function App() {
 
-    const initState: InitStateType = {
-        startValue: 0,
-        maxValue: 5,
-        counterValue: 0,
-        settingsIsActive: false,
-    }
-    const [counterState, counterDispatch] = useReducer(counterReducer, initState)
-
-    useEffect(() => {
-        let counterSettings = localStorage.getItem('counterSettings')
-        if (counterSettings) {
-            let values = JSON.parse(counterSettings)
-            counterDispatch(counterValuesInitialization(values.startValue, values.maxValue))
-        }
-    }, [])
+    const counterDispatch = useDispatch<Dispatch<CounterReducerActionsType>>()
+    const counterState = useSelector((state: AppRootType) => state.counter)
 
     const increaseCounterValue = () => counterDispatch(onCounterValueChange(counterState.counterValue + 1))
     const resetCounterValue = () => counterDispatch(onCounterValueChange(counterState.startValue))
-    const onMaxValueChange = useCallback((newMaxValue: number) => counterDispatch(onMaxValueChangeAC(newMaxValue)), [])
-    const onStartValueChange = useCallback((newStartValue: number) => counterDispatch(onStartValueChangeAC(newStartValue)), [])
-    const onSetButtonClick = useCallback(() => {
-        localStorage.setItem('counterSettings',
-            JSON.stringify({startValue: counterState.startValue, maxValue: counterState.maxValue}))
-        counterDispatch(onSetButtonClickAC())
-    }, [counterState.startValue, counterState.maxValue])
+    const onMaxValueChange = useCallback((newMaxValue: number) =>
+        counterDispatch(onMaxValueChangeAC(newMaxValue)), [counterDispatch])
+    const onStartValueChange = useCallback((newStartValue: number) =>
+        counterDispatch(onStartValueChangeAC(newStartValue)), [counterDispatch])
+    const onSetButtonClick = useCallback(() =>
+        counterDispatch(onSetButtonClickAC()), [counterDispatch])
 
     return (
         <div className="App">

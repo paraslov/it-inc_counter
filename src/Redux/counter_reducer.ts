@@ -1,7 +1,15 @@
-import {InitStateType} from '../App';
 
 
-export const counterReducer = (state: InitStateType, action: CounterReducerActionsType): InitStateType => {
+const initState = {
+    startValue: 0,
+    maxValue: 5,
+    counterValue: 0,
+    settingsIsActive: false,
+}
+
+export type InitStateType = typeof initState
+
+export const counterReducer = (state: InitStateType = initState, action: CounterReducerActionsType): InitStateType => {
     switch (action.type) {
         case 'ps/counter_reducer/ON_COUNTER_VALUE_CHANGE':
             return {...state, counterValue: action.newCounterValue}
